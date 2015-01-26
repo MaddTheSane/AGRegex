@@ -66,10 +66,8 @@ static unsigned long int
 byteflip(unsigned long int value, int n)
 {
 if (n == 2) return ((value & 0x00ff) << 8) | ((value & 0xff00) >> 8);
-return ((value & 0x000000ff) << 24) |
-       ((value & 0x0000ff00) <<  8) |
-       ((value & 0x00ff0000) >>  8) |
-       ((value & 0xff000000) >> 24);
+else if (n == 4) return __builtin_bswap32(value);
+else return __builtin_bswap64(value);
 }
 
 
